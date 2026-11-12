@@ -8,6 +8,14 @@ let tafeloutput3Obj = document.getElementById("outputTafel3");
 let randomTafeller = 0;
 let randomTeller = 0;
 let randomUitkomst = 0;
+let OefenTafeller = 0;
+let randomOefenTeller = 0;
+let randomOefenUitkomst = 0;
+let OefenTafelinputObj = document.getElementById("inputOefenTafel");
+let randomOefenTafeloutputObj = document.getElementById("outputRandomOefenTafel");
+let randomOefenTafelinputObj = document.getElementById("inputRandomOefenTafel");
+let randomOefenTafelAntwoordObj = document.getElementById("randomOefenUitkomst");
+
 
 function showTafel() {
     let tafel = tafelinputObj.value
@@ -19,6 +27,46 @@ function showTafel() {
     }
     tafeloutputObj.innerHTML = output;
 }
+
+function startOefenTafel()
+{
+    OefenTafeller = Number(OefenTafelinputObj.value);
+
+    if (OefenTafeller < 1 || OefenTafeller > 100)
+    {
+        randomOefenTafeloutputObj.innerHTML = "Kies een tafel tussen 1 en 100!";
+        return;
+    }
+
+    randomOefenTafel();
+}
+
+function randomOefenTafel()
+{
+    randomOefenTeller = Math.floor(Math.random() * 10) + 1;
+    randomOefenUitkomst = OefenTafeller * randomOefenTeller;
+
+    randomOefenTafeloutputObj.innerHTML =
+        OefenTafeller + " x " + randomOefenTeller + " = ";
+
+    randomOefenTafelinputObj.value = "";
+    randomOefenTafelAntwoordObj.innerHTML = "";
+}
+
+function randomOefenTafelifCorrect()
+{
+    if (Number(randomOefenTafelinputObj.value) === randomOefenUitkomst)
+    {
+        randomOefenTafelAntwoordObj.innerHTML = "Dat is correct, volgende som:<br>";
+        randomOefenTafel();
+    }
+    else
+    {
+        randomOefenTafelAntwoordObj.innerHTML = "Dat is fout, probeer opnieuw!";
+    }
+}
+
+
 function randomTafel() 
 {
     randomTafeller = Math.floor(Math.random() * 10) + 1;
